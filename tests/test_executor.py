@@ -27,7 +27,7 @@ from thalas.execution.status_actor import StatusActor
 
 @pytest.fixture(scope="module", autouse=True)
 def ray_start():
-    ray.init("local", ignore_reinit_error=True, namespace="thalas")
+    ray.init("local", namespace="thalas")
     yield
     ray.shutdown()  # teardown
 
@@ -276,7 +276,7 @@ def test_status_actor():
             ray.get(refs)
 
             ray.shutdown()
-            ray.init("local", ignore_reinit_error=True, namespace="thalas")
+            ray.init("local", namespace="thalas")
             actor = StatusActor.options(name="status_actor", get_if_exists=True, lifetime="detached").remote()
 
             for i in range(5):
