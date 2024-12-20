@@ -27,7 +27,7 @@ from thalas.execution.status_actor import StatusActor
 
 @pytest.fixture(scope="module", autouse=True)
 def ray_start():
-    ray.init("local", namespace="thalas")
+    ray.init(namespace="thalas")
     yield
     ray.shutdown()  # teardown
 
