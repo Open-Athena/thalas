@@ -21,7 +21,7 @@ from thalas.execution.executor_step_status import (
 
 @pytest.fixture(scope="module", autouse=True)
 def ray_start():
-    ray.init(namespace="thalas")
+    ray.init(namespace="thalas", ignore_reinit_error=True)
     yield
     ray.shutdown()  # teardown
 
