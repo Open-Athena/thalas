@@ -864,6 +864,7 @@ dependencies = [
     { name = "draccus" },
     { name = "fsspec" },
     { name = "ray" },
+    { name = "toml" },
 ]
 
 [package.dev-dependencies]
@@ -891,6 +892,7 @@ requires-dist = [
     { name = "draccus", specifier = ">=0.11.5" },
     { name = "fsspec" },
     { name = "ray", specifier = "==2.45" },
+    { name = "toml" },
 ]
 
 [package.metadata.requires-dev]

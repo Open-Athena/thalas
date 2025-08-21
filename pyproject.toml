@@ -14,6 +14,7 @@ dependencies = [
     "draccus>=0.11.5",
     "ray==2.45",
     "fsspec",
+    "toml",
 ]
 
 [dependency-groups]
@@ -46,6 +47,9 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["A", "B", "E", "F", "I", "NPY", "RUF", "UP", "W"]
 ignore = ["F722", "B008", "UP015", "A005", "I001"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
 
 [tool.mypy]
 python_version = "3.10"
