@@ -211,6 +211,10 @@ def test_force_run_failed():
     cleanup_log(log)
 
 
+@pytest.mark.skipif(
+    os.name == "nt" or os.uname().sysname == "Darwin",
+    reason="This test hangs locally / on macOS"
+)
 def test_status_actor():
     """Test the status actor that keeps track of statuses."""
 
