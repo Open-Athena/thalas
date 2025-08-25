@@ -8,7 +8,7 @@
 4. Set up pre-commit hooks
 
 ```bash
-git clone https://github.com/marin-community/thalas.git
+git clone https://github.com/Open-Athena/thalas.git
 cd thalas
 uv venv --python 3.11
 source .venv/bin/activate

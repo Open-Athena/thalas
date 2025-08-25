@@ -50,7 +50,7 @@ Solution: based on the name and version, the output path of a step is computed.
 For example, if name is "documents/fineweb-resiliparse", then the full path
 might be:
 
-    gs://thalas-us-central2/documents/fineweb-resiliparse-8c2f3a
+    gs://marin-us-central2/documents/fineweb-resiliparse-8c2f3a
 
 ## Final remarks
 
@@ -861,7 +861,7 @@ class Executor:
         """Return the URL where the experiment can be viewed."""
         # TODO: remove hardcoding
         if self.prefix.startswith("gs://"):
-            host = "https://thalas.community/data-browser"
+            host = "https://marin.community/data-browser"
         else:
             host = "http://localhost:5000"
 
