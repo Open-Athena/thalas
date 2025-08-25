@@ -1002,7 +1002,6 @@ def should_run(
             log_once = False
 
         if status in [STATUS_RUNNING, STATUS_WAITING, STATUS_UNKNOWN]:
-            print(f"Step {step_name} ({current_owner_task_id}) is waiting for lock")
             time.sleep(5)
             continue
 
