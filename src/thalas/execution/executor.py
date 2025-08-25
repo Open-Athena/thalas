@@ -110,11 +110,11 @@ from thalas.execution.executor_step_status import (
     get_latest_status_from_gcs,
     get_status_path,
 )
+from thalas.utilities import fsspec_utils
 from thalas.execution.status_actor import PreviousTaskFailedError, StatusActor
 from thalas.utilities.executor_utils import get_pip_dependencies
 from thalas.utilities.json_encoder import CustomJsonEncoder
 from thalas.utilities.ray_utils import is_local_ray_cluster, schedule_on_head_node_strategy
-from thalas.utils import fsspec_mkdirs
 
 logger = logging.getLogger("ray")
 
@@ -891,12 +891,12 @@ class Executor:
         # Write out info for each step
         for step, info in zip(self.steps, self.step_infos, strict=True):
             info_path = _get_info_path(self.output_paths[step])
-            fsspec_mkdirs(os.path.dirname(info_path))
+            fsspec_utils.mkdirs(os.path.dirname(info_path))
             with fsspec.open(info_path, "w") as f:
                 print(json.dumps(asdict(info), indent=2, cls=CustomJsonEncoder), file=f)
 
         # Write out info for the entire execution
-        fsspec_mkdirs(os.path.dirname(self.executor_info_path))
+        fsspec_utils.mkdirs(os.path.dirname(self.executor_info_path))
         with fsspec.open(self.executor_info_path, "w") as f:
             print(json.dumps(asdict(self.executor_info), indent=2, cls=CustomJsonEncoder), file=f)
 
