@@ -50,7 +50,7 @@ Solution: based on the name and version, the output path of a step is computed.
 For example, if name is "documents/fineweb-resiliparse", then the full path
 might be:
 
-    gs://thalas-us-central2/documents/fineweb-resiliparse-8c2f3a
+    gs://marin-us-central2/documents/fineweb-resiliparse-8c2f3a
 
 ## Final remarks
 
@@ -93,7 +93,6 @@ from urllib.parse import urlparse
 
 import draccus
 import fsspec
-import levanter.utils.fsspec_utils as fsspec_utils
 import ray
 import ray.remote_function
 from ray.runtime_env import RuntimeEnv
@@ -111,6 +110,7 @@ from thalas.execution.executor_step_status import (
     get_latest_status_from_gcs,
     get_status_path,
 )
+from thalas.utilities import fsspec_utils
 from thalas.execution.status_actor import PreviousTaskFailedError, StatusActor
 from thalas.utilities.executor_utils import get_pip_dependencies
 from thalas.utilities.json_encoder import CustomJsonEncoder
@@ -861,7 +861,7 @@ class Executor:
         """Return the URL where the experiment can be viewed."""
         # TODO: remove hardcoding
         if self.prefix.startswith("gs://"):
-            host = "https://thalas.community/data-browser"
+            host = "https://marin.community/data-browser"
         else:
             host = "http://localhost:5000"
 
@@ -1095,14 +1095,14 @@ def executor_main(config: ExecutorMainConfig, steps: list[ExecutorStep], descrip
     prefix = config.prefix
     if prefix is None:
         # infer from the environment
-        if "MARIN_PREFIX" in os.environ:
-            prefix = os.environ["MARIN_PREFIX"]
+        if "THALAS_PREFIX" in os.environ:
+            prefix = os.environ["THALAS_PREFIX"]
         else:
-            raise ValueError("Must specify a prefix or set the MARIN_PREFIX environment variable")
-    elif "MARIN_PREFIX" in os.environ:
-        if prefix != os.environ["MARIN_PREFIX"]:
+            raise ValueError("Must specify a prefix or set the THALAS_PREFIX environment variable")
+    elif "THALAS_PREFIX" in os.environ:
+        if prefix != os.environ["THALAS_PREFIX"]:
             logger.warning(
-                f"MARIN_PREFIX environment variable ({os.environ['MARIN_PREFIX']}) is different from the "
+                f"THALAS_PREFIX environment variable ({os.environ['THALAS_PREFIX']}) is different from the "
                 f"specified prefix ({prefix})"
             )
 
