@@ -10,8 +10,8 @@ import pytest
 import ray
 from draccus.utils import Dataclass
 
-from marin.execution import THIS_OUTPUT_PATH
-from marin.execution.executor import (
+from thalas.execution import THIS_OUTPUT_PATH
+from thalas.execution.executor import (
     Executor,
     ExecutorStep,
     InputName,
@@ -21,7 +21,7 @@ from marin.execution.executor import (
     this_output_path,
     versioned,
 )
-from marin.execution.executor_step_status import (
+from thalas.execution.executor_step_status import (
     STATUS_SUCCESS,
     get_current_status,
     get_status_path,
@@ -31,7 +31,7 @@ from marin.execution.executor_step_status import (
 
 @pytest.fixture(scope="module", autouse=True)
 def ray_start():
-    ray.init(namespace="marin", ignore_reinit_error=True, resources={"head_node": 1})
+    ray.init(namespace="thalas", ignore_reinit_error=True, resources={"head_node": 1})
     yield
     ray.shutdown()  # teardown
 
